@@ -85,7 +85,7 @@ This frontend connects to the [FlowForge Backend](https://github.com/snageshpras
 
 ## License
 
-Copyright (c) 2025 Nagesh Prasad. All Rights Reserved.
+Copyright (c) 2026 Nagesh Prasad Sahoo. All Rights Reserved.
 
 This source code is publicly visible for portfolio and review purposes only.
 Unauthorized use, copying, modification, distribution, or commercial use
