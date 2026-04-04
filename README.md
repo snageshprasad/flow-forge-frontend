@@ -13,7 +13,6 @@
 | API Layer | RTK Query |
 | Routing | React Router v7 |
 | Styling | Tailwind CSS v4 |
-| Theme | CSS Variables + Token System |
 
 ---
 
@@ -26,87 +25,8 @@
 - **Threaded comments** — nested comment threads on tasks
 - **Activity log** — full audit trail per board and task
 - **Invite system** — token-based email invite flow
-- **Light / Dark mode** — fully token-based theme system, persists across sessions, respects OS preference
+- **Light / Dark mode** — token-based theme, persists across sessions, respects OS preference
 - **Responsive** — works across desktop and tablet
-
----
-
-## Theme System
-
-FlowForge uses a fully token-based theme system — no `dark:` utility classes anywhere in the codebase.
-
-All colors are defined as CSS variables in `index.css`:
-
-```css
-:root {
-  --bg-primary: #FAF7F2;   /* warm creamy base */
-  --accent: #C97D4E;       /* terracotta */
-}
-
-.dark {
-  --bg-primary: #0F1117;   /* deep navy */
-  --accent: #7B8FFF;       /* electric indigo */
-}
-```
-
-Mapped to Tailwind utilities in `tailwind.config.js`:
-
-```js
-colors: {
-  "bg-primary": "var(--bg-primary)",
-  "accent": "var(--accent)",
-}
-```
-
-Used in components as single tokens:
-
-```jsx
-<div className="bg-bg-primary text-text-primary">
-  <span className="text-accent">FlowForge</span>
-</div>
-```
-
-Toggle is handled by `useTheme` hook — adds/removes `class="dark"` on `<html>` and persists to `localStorage`. Falls back to OS preference on first visit.
-
----
-
-## Project Structure
-
-```
-src/
-├── components/
-│   └── ThemeToggle.jsx         # sun/moon toggle button
-├── hooks/
-│   └── useTheme.js             # theme toggle + localStorage
-├── pages/                      # route-level page components
-├── redux/
-│   ├── store.js                # redux store — set once, never touched
-│   ├── rootReducer.js          # add new slices here only
-│   ├── services/
-│   │   └── api.js              # base RTK Query API with token injection
-│   └── modules/
-│       ├── auth/
-│       │   ├── authSlice.js    # user, token, isAuthenticated
-│       │   └── authApi.js      # login, register, getMe, changePassword
-│       ├── organization/
-│       │   ├── organizationSlice.js
-│       │   └── organizationApi.js
-│       ├── board/
-│       │   ├── boardSlice.js
-│       │   └── boardApi.js
-│       ├── task/
-│       │   ├── taskSlice.js
-│       │   └── taskApi.js
-│       ├── status/
-│       │   └── statusApi.js
-│       ├── comment/
-│       │   └── commentApi.js
-│       └── invite/
-│           └── inviteApi.js
-├── App.jsx
-├── index.css                   # CSS variable token definitions
-└── main.jsx                    # theme init before React mounts
-```
 
 ---
 
@@ -154,35 +74,6 @@ npm run build
 | Variable | Required | Description |
 |---|---|---|
 | `VITE_API_URL` | Yes | FlowForge backend API base URL |
-
----
-
-## Redux Architecture
-
-All API modules extend a single `baseApi` using RTK Query's `injectEndpoints` pattern. This means:
-
-- `store.js` — never modified after initial setup
-- `api.js` — never modified after initial setup
-- Adding a new API module → create `moduleApi.js` and call `baseApi.injectEndpoints()`
-- Adding a new slice → only update `rootReducer.js`
-
-JWT token is automatically injected into every request via `prepareHeaders` in `baseApi`.
-
----
-
-## Color Tokens
-
-| Token | Light | Dark | Usage |
-|---|---|---|---|
-| `bg-primary` | `#FAF7F2` | `#0F1117` | page background |
-| `bg-card` | `#FFFFFF` | `#161924` | cards, panels |
-| `accent` | `#C97D4E` | `#7B8FFF` | buttons, links, highlights |
-| `text-primary` | `#3D2F22` | `#C8CCDF` | headings, body |
-| `text-muted` | `#9E8F7E` | `#4A5068` | labels, placeholders |
-| `priority-urgent` | red | muted red | urgent tasks |
-| `priority-high` | orange | muted orange | high priority tasks |
-| `priority-medium` | amber | muted amber | medium priority tasks |
-| `priority-low` | green | muted green | low priority tasks |
 
 ---
 
