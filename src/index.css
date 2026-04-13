@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        /* ── Backgrounds ── */
+        --bg-primary: #FAF7F2;
+        --bg-secondary: #F0EAE2;
+        --bg-card: #FFFFFF;
+        --bg-sidebar: #F5F0EA;
+        --bg-input: #FFFFFF;
+        --bg-hover: #EDE5DA;
+
+        /* ── Text ── */
+        --text-primary: #3D2F22;
+        --text-secondary: #7A6555;
+        --text-muted: #9E8F7E;
+        --text-inverse: #FFFFFF;
+
+        /* ── Accent ── */
+        --accent: #C97D4E;
+        --accent-hover: #B56A3C;
+        --accent-subtle: #F5E6D8;
+        --accent-text: #A05530;
+
+        /* ── Border ── */
+        --border: #E8E0D4;
+        --border-strong: #D4C9BC;
+
+        /* ── Status ── */
+        --status-todo: #C4B5A0;
+        --status-progress: #C97D4E;
+        --status-done: #7BAE8C;
+
+        /* ── Priority ── */
+        --priority-urgent-bg: #FDEAEA;
+        --priority-urgent-text: #B52A2A;
+        --priority-high-bg: #FEF0E6;
+        --priority-high-text: #C06020;
+        --priority-medium-bg: #FEF6E0;
+        --priority-medium-text: #8A6820;
+        --priority-low-bg: #E8F5EE;
+        --priority-low-text: #2E7A50;
+    }
+
+    .dark {
+        /* ── Backgrounds ── */
+        --bg-primary: #0F1117;
+        --bg-secondary: #131620;
+        --bg-card: #161924;
+        --bg-sidebar: #0C0E14;
+        --bg-input: #1C2035;
+        --bg-hover: #1C2035;
+
+        /* ── Text ── */
+        --text-primary: #C8CCDF;
+        --text-secondary: #7B85A8;
+        --text-muted: #4A5068;
+        --text-inverse: #0F1117;
+
+        /* ── Accent ── */
+        --accent: #7B8FFF;
+        --accent-hover: #6070E8;
+        --accent-subtle: #1E2240;
+        --accent-text: #9BA5CC;
+
+        /* ── Border ── */
+        --border: #1E2340;;
+        --border-strong: #2E3450;
+
+        /* ── Status ── */
+        --status-todo: #2E3450;
+        --status-progress: #5B6AFF;
+        --status-done: #2A7A5A;
+
+        /* ── Priority ── */
+        --priority-urgent-bg: #2A1414;
+        --priority-urgent-text: #E06060;
+        --priority-high-bg: #251A0F;
+        --priority-high-text: #D4844A;
+        --priority-medium-bg: #1E1C0F;
+        --priority-medium-text: #C8A840;
+        --priority-low-bg: #0F2018;
+        --priority-low-text: #4DB880;
+    }
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-input) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    caret-color: var(--text-primary);
+    border-radius: 7px !important;
+}

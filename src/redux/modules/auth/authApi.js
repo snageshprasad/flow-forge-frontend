@@ -1,0 +1,41 @@
+import { baseApi } from "../../services/api";
+
+export const authApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (data) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    login: builder.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    getMe: builder.query({
+      query: () => "/auth/me",
+      providesTags: ["Auth"],
+    }),
+
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "PUT",
+        body: data,
+      }),
+    }),
+  }),
+});
+
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useGetMeQuery,
+  useChangePasswordMutation,
+} = authApi;
